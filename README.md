@@ -1,12 +1,12 @@
 
-# Template Express + MVC + API
+# App Express + MVC + API + MONGODB
 
 ## Run Locally
 
 Clone the project
 
 ```bash
-  git clone https://github.com/Sammy593/express_app.git
+  git clone https://github.com/Sammy593/express_mongo_app.git
 ```
 
 Go to the project directory

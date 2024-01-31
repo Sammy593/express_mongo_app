@@ -1,0 +1,4 @@
+20240130	23:08:33	840d605a-2900-4417-a57e-4282b473ad3b	GET	undefined	/cliente/
+20240130	23:08:51	4dbf5719-02a9-4c5b-83b4-5217da8943de	GET	undefined	/cliente/
+20240130	23:08:53	68db538f-b843-4962-a4ac-4e583f4724ad	GET	undefined	/cliente/
+20240130	23:12:10	f80b4498-6067-47ec-b1cc-149f9952022b	POST	undefined	/cliente/
