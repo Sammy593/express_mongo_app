@@ -1,33 +1,29 @@
 import mongoose from 'mongoose';
 
 const clientSchema = new mongoose.Schema({
-    cantidad_entrega: {
-        type: Number,
-        required: true,
-        unique: true
-    },
     cedula_cliente: {
         type: String,
         required: true,
         unique: true
     },
-    contacto: {
+    nombres: {
         type: String,
         required: true
     },
-    detalle_entrega: {
+    apellidos: {
         type: String,
         required: true
     },
-    direccion_entrega: {
+    celular: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    correo: {
         type: String,
         required: true
     },
-    fecha_entrega: {
-        type: Date,
-        required: true
-    },
-    nombre_cliente: {
+    direccion: {
         type: String,
         required: true
     }

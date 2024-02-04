@@ -12,5 +12,6 @@ router.get('/:id', pedidoController.evaluarYactualizarEstadoPedido);
 router.delete('/:id', pedidoController.deletePedido);
 router.get('/cantidadPedidos', pedidoController.cantidadPedidos);
 router.get('/obtenerPorId/:id', pedidoController.obtenerPorId);
+router.post('/entregado/:id', pedidoController.estadoEntregado);
 
 export default router;

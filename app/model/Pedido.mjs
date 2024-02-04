@@ -6,10 +6,6 @@ const pedidoSchema = new mongoose.Schema({
         required: true,
         unique: false
     },
-    detalles_pedido: {
-        type: String,
-        required: true
-    },
     observaciones: {
         type: String,
         required: false,
@@ -22,6 +18,10 @@ const pedidoSchema = new mongoose.Schema({
     },
     cod_cliente: {
         type: Schema.Types.ObjectId,
+        required: true
+    },
+    fecha_entrega: {
+        type: Date,
         required: true
     },
     paquetes: {

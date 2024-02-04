@@ -6,8 +6,8 @@ const router = express.Router();
 // Rutas para CRUD de clientes
 router.post('/', clienteController.createCliente);
 router.get('/', clienteController.getAllClientes);
-router.get('/:id', clienteController.getClienteById);
-router.get('/:cedula', clienteController.getClienteByCedula);
+router.get('/byId/:id', clienteController.getClienteById);
+router.get('/byCedula/:cedula', clienteController.getClienteByCedula);
 router.put('/:id', clienteController.updateCliente);
 router.delete('/:id', clienteController.deleteCliente);
 

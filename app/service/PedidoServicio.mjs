@@ -99,3 +99,21 @@ export const obtenerPorId = async (idPedido) => {
         throw new Error(`Error al buscar: ${err.message}`);
     }
 };
+
+//cambiar estado a "entregado"
+export const estadoEntregado = async (pedidoId) => {
+    try {
+        const pedido = await Pedido.findById(pedidoId);
+        if (!pedido) {
+            throw new Error('Pedido no encontrado');
+        }
+        pedido.estado = 'entregado';
+        const to_day = new Date();
+        pedido.fecha_entrega = to_day.getDate();
+        const pedidoActualizado = await pedido.save();
+
+        return pedidoActualizado;
+    } catch (err) {
+        throw new Error(`Error al eliminar: ${err.message}`);
+    }
+};

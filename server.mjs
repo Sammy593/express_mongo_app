@@ -28,10 +28,8 @@ app.use('/', express.static(path.join(new URL('.', import.meta.url).pathname, '/
 
 // Routes
 import rootRouter from './routes/root.mjs';
-import clienteRouter from './routes/api/ClienteRoutes.mjs';
 
 app.use('/', rootRouter);
-app.use('/cliente', clienteRouter);
 
 app.all('*', (req, res) => {
     res.status(404);

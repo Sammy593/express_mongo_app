@@ -2,7 +2,7 @@ import * as clienteServiceModule from '../service/ClienteServicio.mjs';
 
 export const createCliente = async (req, res) => {
     try {
-        const nuevoCliente = await clienteServiceModule.createCliente(req.body);
+        const nuevoCliente = await clienteServiceModule.createCliente(req.body.cedula, req.body);
         res.status(201).json(nuevoCliente);
     } catch (err) {
         res.status(400).json({ message: err.message });

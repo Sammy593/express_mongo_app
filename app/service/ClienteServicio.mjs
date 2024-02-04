@@ -1,9 +1,15 @@
 import Cliente from '../model/Cliente.mjs';
 
-export const createCliente = async (clienteData) => {
+export const createCliente = async (cedula, clienteData) => {
     try {
-        const nuevoCliente = await Cliente.create(clienteData);
-        return nuevoCliente;
+        const cliente = await Cliente.findOne({ cedula_cliente: cedula });
+        console.log(cliente);
+        if (cliente != null) {
+            const nuevoCliente = await Cliente.create(clienteData);
+            return nuevoCliente;
+        }else{
+            throw new Error('Ya existe un cliente registrado con esta cedula');
+        }
     } catch (err) {
         throw new Error(`Error al crear cliente: ${err.message}`);
     }

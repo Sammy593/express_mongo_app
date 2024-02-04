@@ -54,6 +54,15 @@ export const deletePedido = async (req, res) => {
     }
 };
 
+export const estadoEntregado = async (req, res) => {
+    try {
+        const respuesta = await pedidoServiceModule.estadoEntregado(req.params.id);
+        res.status(204).json(respuesta);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+};
+
 export const cantidadPedidos = async (req, res) => {
     try {
         const respuesta = await pedidoServiceModule.cantidadPedidos();
