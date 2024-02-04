@@ -44,3 +44,6 @@
 20240204	01:23:04	3ebc47bb-f48b-438a-84d1-5c068219abf5	GET	undefined	/cliente/byCedula/1723391031
 20240204	01:23:09	63141042-1ece-432a-a2fb-9fff1c73e404	GET	undefined	/cliente/byCedula/1723391034
 20240204	01:23:15	fe5dc463-4f53-4f81-9ca5-47090da439c5	GET	undefined	/cliente/byCedula/1723391031
+20240204	15:30:58	63df7192-3815-43d5-8d77-0487937e3ab6	GET	http://localhost:4200	/cliente
+20240204	15:31:00	35505362-0f12-4650-99b9-8bbd84084394	GET	http://localhost:4200	/cliente
+20240204	15:31:01	6a06bc29-21a8-40da-9255-c5200eb60bd6	GET	http://localhost:4200	/cliente

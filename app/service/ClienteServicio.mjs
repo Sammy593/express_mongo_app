@@ -71,3 +71,12 @@ export const deleteCliente = async (clienteId) => {
         throw new Error(`Error al eliminar cliente: ${err.message}`);
     }
 };
+
+export const getClienteCount = async () => {
+    try {
+        const count = await Cliente.countDocuments();
+        return count;
+    } catch (err) {
+        throw new Error(`Error al obtener el conteo de clientes: ${err.message}`);
+    }
+};

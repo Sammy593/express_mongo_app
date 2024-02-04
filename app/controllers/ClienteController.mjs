@@ -53,3 +53,12 @@ export const deleteCliente = async (req, res) => {
         res.status(404).json({ message: err.message });
     }
 };
+
+export const getClienteCount = async (req, res) => {
+    try {
+        const count = await clienteServiceModule.getClienteCount();
+        res.status(200).json({ count });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
