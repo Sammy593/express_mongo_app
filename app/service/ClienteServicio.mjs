@@ -4,7 +4,7 @@ export const createCliente = async (cedula, clienteData) => {
     try {
         const cliente = await Cliente.findOne({ cedula_cliente: cedula });
         console.log(cliente);
-        if (cliente != null) {
+        if (cliente == null) {
             const nuevoCliente = await Cliente.create(clienteData);
             return nuevoCliente;
         }else{
