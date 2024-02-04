@@ -10,6 +10,8 @@ router.get('/byId/:id', clienteController.getClienteById);
 router.get('/byCedula/:cedula', clienteController.getClienteByCedula);
 router.put('/:id', clienteController.updateCliente);
 router.delete('/:id', clienteController.deleteCliente);
+
+// Ruta para obtener el conteo de clientes
 router.get('/count', clienteController.getClienteCount);
 
 export default router;

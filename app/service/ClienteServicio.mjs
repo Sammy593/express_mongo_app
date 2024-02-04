@@ -72,6 +72,7 @@ export const deleteCliente = async (clienteId) => {
     }
 };
 
+//Este es para saber cuantos docuemntos hay en Clientes
 export const getClienteCount = async () => {
     try {
         const count = await Cliente.countDocuments();

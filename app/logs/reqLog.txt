@@ -47,3 +47,5 @@
 20240204	15:30:58	63df7192-3815-43d5-8d77-0487937e3ab6	GET	http://localhost:4200	/cliente
 20240204	15:31:00	35505362-0f12-4650-99b9-8bbd84084394	GET	http://localhost:4200	/cliente
 20240204	15:31:01	6a06bc29-21a8-40da-9255-c5200eb60bd6	GET	http://localhost:4200	/cliente
+20240204	17:09:12	1bfbb20d-36c5-418f-9859-85ee668ad24b	GET	http://localhost:4200	/cliente/count
+20240204	17:09:19	f2c77179-7b39-48d3-b635-a4261375f848	GET	undefined	/cliente/count
