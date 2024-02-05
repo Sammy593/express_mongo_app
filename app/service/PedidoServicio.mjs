@@ -1,11 +1,88 @@
 import Pedido from '../model/Pedido.mjs';
+import Cliente from '../model/Cliente.mjs';
 
 //Crear -- string
 export const createPedido = async (pedidoData) => {
     try {
-        return await Pedido.create(pedidoData);
+        const cliente = await Cliente.findById(pedidoData._cliente);
+        if (!cliente) {
+            throw new Error("Cliente no encontrado");
+        }
+        var pedidoGuardado = await Pedido.create(pedidoData);        
+        cliente.pedidos.push(pedidoGuardado._id.toString());
+        await cliente.save();
+        return { pedido_guardado: pedidoGuardado };
+    } catch (error) {
+        throw new Error(`Error al crear pedido: ${error.message}`);
+    }
+};
+
+//funcion con session (solo para atlas) servicio con replicas
+/*
+export const createPedido = async (pedidoData) => {
+    const session = await mongoose.startSession();
+    session.startTransaction();
+
+    try {
+
+        var pedido = new Pedido(pedidoData);
+        const pedidoGuardado = await pedido.save({session});
+        
+        const cliente = await Cliente.findById(pedidoGuardado._id);
+        if (!cliente) {
+            throw new Error("Cliente no encontrado");
+        }
+
+        cliente.pedidos.push(pedidoGuardado._id.toString());
+        await cliente.save({ session });
+        await session.commitTransaction();
+        session.endSession();
+        return { pedido_guardado: pedidoGuardado };
+
+    } catch (error) {
+        await session.abortTransaction();
+        throw new Error(`Error al crear pedido: ${error.message}`);
+    } finally {
+        session.endSession();
+    }
+};
+*/
+
+//Obtener pedidos con nombre de cliente
+export const obtenerListaConCliente = async () => {
+    try {
+        const lista = await Pedido.aggregate([
+            {
+                $lookup: {
+                  from: 'clientes',
+                  localField: '_cliente',
+                  foreignField: '_id',
+                  as: 'cliente'
+                }
+              },
+              {
+                $project: {
+                  _id: 1,
+                  detalles_pedido: 1,
+                  cantidad_solicitada: 1,
+                  estado: 1,
+                  fecha_entrega: 1,
+                  nombre_cliente: { $arrayElemAt: ["$cliente.nombres", 0] },
+                  apellido_cliente: { $arrayElemAt: ["$cliente.apellidos", 0] },
+                  suma_cantidad_paquetes: {
+                    $reduce: {
+                      input: "$paquetes",
+                      initialValue: 0,
+                      in: { $add: ["$$value", "$$this.cantidad"] }
+                    }
+                  }
+                }
+              }
+            ]);
+      
+          return lista;
     } catch (err) {
-        throw new Error(`Error al crear: ${err.message}`);
+        throw new Error(`Error al buscar: ${err.message}`);
     }
 };
 

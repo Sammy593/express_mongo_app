@@ -1,9 +1,10 @@
 import mongoose from 'mongoose';
 
 try {
-  // Connect to MongoDB
-  console.log(process.env.MONGO_URL);
-  await mongoose.connect(process.env.MONGO_URL);
+  // Connect to MongoDB - Configurar valor de variable de entorno en archivo .env
+  console.log(process.env.MONGO_URL_LOCAL);
+  
+  await mongoose.connect(process.env.MONGO_URL_LOCAL);
 
   // Event listeners for MongoDB connection
   const db = mongoose.connection;

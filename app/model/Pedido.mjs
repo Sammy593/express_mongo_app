@@ -16,16 +16,17 @@ const pedidoSchema = new mongoose.Schema({
         required: false,
         default: 'N/A'
     },
-    cod_cliente: {
-        type: Schema.Types.ObjectId,
-        required: true
+    _cliente: { 
+        type: Schema.Types.ObjectId, 
+        ref: "clientes"
     },
     fecha_entrega: {
-        type: Date,
+        type: String,
         required: true
     },
     paquetes: {
         type: Array,
+        default: [],
         required: false
     }
 });

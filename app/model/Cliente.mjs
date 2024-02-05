@@ -26,6 +26,10 @@ const clientSchema = new mongoose.Schema({
     direccion: {
         type: String,
         required: true
+    },
+    pedidos: {
+        type: [mongoose.Schema.Types.ObjectId],
+        default: []
     }
 });
 
