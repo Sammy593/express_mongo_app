@@ -134,6 +134,7 @@ export const evaluarYactualizarEstadoPedido = async (pedidoId) => {
           } else {
             pedido.estado = 'pendiente';
           }
+          //Estado entrega
           const pedidoActualizado = await pedido.save();
 
         return pedidoActualizado;

@@ -31,6 +31,7 @@ export const obtenerListaPedidosAbastecidos = async (req, res) => {
     }
 };
 
+/*
 export const agregarPaquetes = async (req, res) => {
     try {
         const respuesta = await pedidoServiceModule.agregarPaquetes(req.params.id, req.body);
@@ -47,7 +48,11 @@ export const evaluarYactualizarEstadoPedido = async (req, res) => {
     } catch (err) {
         res.status(400).json({ message: err.message });
     }
-};
+};*/
+
+
+
+
 
 export const deletePedido = async (req, res) => {
     try {

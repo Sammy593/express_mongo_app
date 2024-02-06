@@ -72,7 +72,6 @@ export const deleteCliente = async (clienteId) => {
     }
 };
 
-//Este es para saber cuantos docuemntos hay en Clientes
 export const getClienteCount = async () => {
     try {
         const count = await Cliente.countDocuments();
@@ -81,3 +80,4 @@ export const getClienteCount = async () => {
         throw new Error(`Error al obtener el conteo de clientes: ${err.message}`);
     }
 };
+

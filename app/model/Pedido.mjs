@@ -14,15 +14,14 @@ const pedidoSchema = new mongoose.Schema({
     estado: {
         type: String,
         required: false,
-        default: 'N/A'
+        default: 'pendiente'
     },
     _cliente: { 
         type: Schema.Types.ObjectId, 
         ref: "clientes"
     },
     fecha_entrega: {
-        type: String,
-        required: true
+        type: String
     },
     paquetes: {
         type: Array,
