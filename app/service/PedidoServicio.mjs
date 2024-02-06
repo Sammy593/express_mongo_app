@@ -195,3 +195,13 @@ export const estadoEntregado = async (pedidoId) => {
         throw new Error(`Error al eliminar: ${err.message}`);
     }
 };
+
+//contar cuantos pedidos hay en Pedidos
+export const getPedidoCount = async () => {
+    try {
+        const count = await Pedido.countDocuments();
+        return count;
+    } catch (err) {
+        throw new Error(`Error al obtener el conteo de Pedidos: ${err.message}`);
+    }
+};

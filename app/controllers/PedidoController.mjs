@@ -98,3 +98,14 @@ export const obtenerListaConCliente = async (req, res) => {
         res.status(400).json({ message: err.message });
     }
 };
+
+
+export const getPedidoCount = async (req, res) => {
+    try {
+        const count = await pedidoServiceModule.getPedidoCount();
+        res.status(200).json({ count });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+

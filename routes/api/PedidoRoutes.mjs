@@ -15,4 +15,7 @@ router.get('/obtenerPorId/:id', pedidoController.obtenerPorId);
 router.post('/entregado/:id', pedidoController.estadoEntregado);
 router.get('/lista', pedidoController.obtenerListaConCliente);
 
+// Ruta para obtener el conteo de clientes
+router.get('/count', pedidoController.getPedidoCount);
+
 export default router;
