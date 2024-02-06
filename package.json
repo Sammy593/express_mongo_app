@@ -5,7 +5,7 @@
   "main": "server.mjs",
   "scripts": {
     "start": "node server.mjs",
-    "dev": "nodemon server"
+    "dev": "nodemon server.mjs"
   },
   "author": "Samuel Ledesma",
   "license": "ISC",
@@ -21,6 +21,6 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.12"
+    "nodemon": "^2.0.22"
   }
 }

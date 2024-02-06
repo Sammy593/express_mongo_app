@@ -1,24 +1,20 @@
-version: '3.8'
+version: '3'
 
 services:
-  mongodb:
-    image: mongo:latest
-    container_name: mongodb
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongodb_data:/data/db
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=admin
-      - MONGO_INITDB_ROOT_PASSWORD=password
-    networks:
-      - mongodb_network
-  
-  app:
+  web:
+    container_name: express_mongo_app
+    restart: always
     build: .
-    depends_on:
-      - mysqldb
-    links:
-      - mysqldb
     ports:
-      - 3500:3500
+      - "5000:3500"
+    links:
+      - mongo
+    volumes:
+      - .:/usr/src/app
+  mongo:
+    container_name: mongodatabase
+    image: mongo
+    ports:
+      - "27018:27017"
+    logging:
+      driver: none

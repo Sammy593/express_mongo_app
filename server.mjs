@@ -1,5 +1,6 @@
 import express from 'express';
 import path from 'path';
+import { fileURLToPath } from 'url';
 import cors from 'cors';
 import corsOptions from './config/corsOptions.mjs';
 import { logger } from './app/middleware/logEvents.mjs';
@@ -34,7 +35,7 @@ app.use('/', rootRouter);
 app.all('*', (req, res) => {
     res.status(404);
     if (req.accepts('html')) {
-        res.sendFile(path.join(new URL('.', import.meta.url).pathname, 'views', '404.html'));
+        res.sendFile(path.join(path.dirname(fileURLToPath(import.meta.url)), 'views', '404.html'));
     } else if (req.accepts('json')) {
         res.json({ "error": "404 Not Found" });
     } else {

@@ -1,8 +1,1 @@
-20240204	00:43:39	cc8334c0-2531-4e1b-b015-5e6c3466d3dd	TypeError: path must be absolute or specify root to res.sendFile
-20240204	00:44:43	ca67f725-41dd-4834-a161-646e8fba4a86	TypeError: path must be absolute or specify root to res.sendFile
-20240204	01:02:12	5bc3c776-92c7-45bb-b9eb-ef3b5319ddc9	TypeError: path must be absolute or specify root to res.sendFile
-20240204	01:04:59	15439118-d9a5-4ccc-a3d8-e70aee48a823	TypeError: path must be absolute or specify root to res.sendFile
-20240204	01:11:43	dbffffa6-ed0c-4b1f-8109-24ce69dbcef0	TypeError: path must be absolute or specify root to res.sendFile
-20240204	17:19:46	9de9a413-0ab0-4358-9401-0291a7e351b5	TypeError: path must be absolute or specify root to res.sendFile
-20240204	17:26:40	0f819d6c-7aa8-474f-bd5e-6274e0da65ca	TypeError: path must be absolute or specify root to res.sendFile
-20240204	17:27:12	c1aa14f3-3ba4-422f-8283-833abc31a636	TypeError: path must be absolute or specify root to res.sendFile
+
