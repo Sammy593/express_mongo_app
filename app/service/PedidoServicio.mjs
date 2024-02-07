@@ -104,20 +104,28 @@ export const obtenerListaPedidosAbastecidos = async () => {
     }
 };
 
-
-//agregarPaquetesSolicitud -- string
-export const agregarPaquetes = async (pedidoId, nuevosPaquetes) => {
+// =======================================================================
+//agregarPaquetesSolicitud -- true
+export const agregarPaquetes = async (data) => {
     try {
-        const pedido = await Pedido.findById(pedidoId);
+        const pedido = await Pedido.findById(data.idPedido);
         if (!pedido) {
             throw new Error('Pedido no encontrado');
         }
-        nuevosPaquetes.forEach(({ id_lote, cantidad }) => {
-            pedido.paquetes.push({ id_lote, cantidad });
-        });
-        return await pedido.save();
+        const sumaCantidadesPaquetes = pedido.paquetes.reduce((total, paquete) => total + paquete.cantidad, 0);
+        var validacion = pedido.cantidad_solicitada - sumaCantidadesPaquetes;
+
+        if(validacion < data.cantidad_paquetes){
+            throw new Error("Excede la cantidad de paquetes solicitados");
+        }
+        pedido.paquetes.push({ codLote: data.codLote, cantidad: data.cantidad_paquetes });
+        
+        await pedido.save();
+
+        return true;
+
     } catch (err) {
-        throw new Error(`Error al buscar: ${err.message}`);
+        throw new Error(`Error: ${err.message}`);
     }
 };
 
@@ -131,17 +139,19 @@ export const evaluarYactualizarEstadoPedido = async (pedidoId) => {
         const sumaCantidadesPaquetes = pedido.paquetes.reduce((total, paquete) => total + paquete.cantidad, 0);
         if (sumaCantidadesPaquetes === pedido.cantidad_solicitada) {
             pedido.estado = 'abastecido';
-          } else {
-            pedido.estado = 'pendiente';
-          }
-          //Estado entrega
-          const pedidoActualizado = await pedido.save();
+        } else {
+        pedido.estado = 'pendiente';
+        }
 
-        return pedidoActualizado;
+        pedido.save();
+
+        return true;
     } catch (err) {
         throw new Error(`Error al eliminar: ${err.message}`);
     }
 };
+
+// =======================================================================
 
 //Eliminar -- string
 export const deletePedido = async (pedidoId) => {
@@ -168,7 +178,7 @@ export const cantidadPedidos = async () => {
 //buscar por id y mostrar solo: id, campo_nombre -- string
 export const obtenerPorId = async (idPedido) => {
     try {
-        const pedido = await Pedido.findOne({ _id: idPedido }, { _id: 1, detalles_pedido: 1 });
+        const pedido = await Pedido.findOne({ _id: idPedido });
         if (!pedido) {
           throw new Error('Pedido no encontrado');
         }
@@ -187,7 +197,7 @@ export const estadoEntregado = async (pedidoId) => {
         }
         pedido.estado = 'entregado';
         const to_day = new Date();
-        pedido.fecha_entrega = to_day.getDate();
+        pedido.fecha_entrega = to_day.toISOString();
         const pedidoActualizado = await pedido.save();
 
         return pedidoActualizado;

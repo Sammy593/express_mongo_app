@@ -1,4 +1,5 @@
 import * as pedidoServiceModule from '../service/PedidoServicio.mjs';
+import axios from "axios";
 
 export const createPedido = async (req, res) => {
     try {
@@ -30,6 +31,54 @@ export const obtenerListaPedidosAbastecidos = async (req, res) => {
         res.status(400).json({ message: err.message });
     }
 };
+
+export const verDetallesPedido = async (req, res) => {
+    try {
+        const pedido = await pedidoServiceModule.obtenerPorId(req.params.id);
+        let diccionarioLotes = {};
+        pedido.paquetes.forEach(paquete => {
+            let {codLote, cantidad} = paquete;
+            diccionarioLotes[codLote] = (diccionarioLotes[codLote] || 0) + cantidad;
+        });
+        let paquetesFiltrados = Object.keys(diccionarioLotes).map(codLote => {
+            return {"id_lote": codLote, "cantidadPaquetesDisponibles": diccionarioLotes[codLote]};
+        });
+        //Consumir microservicio 1 obtener nombres de lotes
+        const response = await axios.post(process.env.URL_MICROSERVICIO1 + "/loteProductos/enviarProductos", paquetesFiltrados);
+
+        const campo = {
+            paquetesNombre: response.data
+        };
+        
+        // Convertir el objeto pedido a un objeto plano
+        const pedidoPlano = pedido.toObject();
+        
+        // Fusionar los campos adicionales
+        const pedidoDetalles = Object.assign(pedidoPlano, campo);
+
+        res.status(200).json(pedidoDetalles);
+    } catch (err) {
+        res.status(400).json({ message: err});
+    }
+}
+
+export const abastecerPedido = async (req, res) => {
+    try {
+        //Consumir microservicio 1 actualizarCantidadPaquetesLote(cod_lote, cantidad_paquetes)
+        const response = await axios.put(process.env.URL_MICROSERVICIO1 + "/loteProductos/updateCantidadPaquetesDisponibles/"+req.body.codLote+"/"+req.body.cantidad_paquetes);
+        if(response.status == 200){
+            const agregarPaquetes = await pedidoServiceModule.agregarPaquetes(req.body);
+            const evaluar = await pedidoServiceModule.evaluarYactualizarEstadoPedido(req.body.idPedido);
+            if(agregarPaquetes && evaluar){
+                res.status(201).json({message: "Abastecido correctamente"});
+            }else{
+                res.status(500).json({messaje: "Fallo al agregar"});
+            }
+        }
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+}
 
 /*
 export const agregarPaquetes = async (req, res) => {
@@ -65,7 +114,7 @@ export const deletePedido = async (req, res) => {
 
 export const estadoEntregado = async (req, res) => {
     try {
-        const respuesta = await pedidoServiceModule.estadoEntregado(req.params.id);
+        const respuesta = await pedidoServiceModule.estadoEntregado(req.body.idPedido);
         res.status(200).json(respuesta);
     } catch (err) {
         res.status(400).json({ message: err.message });

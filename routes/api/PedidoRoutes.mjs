@@ -9,11 +9,13 @@ router.get('/pendientes', pedidoController.obtenerListaPedidosPendientes);
 router.get('/abastecidos', pedidoController.obtenerListaPedidosAbastecidos);
 //router.post('/addPaquete/:id', pedidoController.agregarPaquetes);
 //router.get('/estado/:id', pedidoController.evaluarYactualizarEstadoPedido);
+router.post('/abastecerPedido', pedidoController.abastecerPedido);
 router.delete('/:id', pedidoController.deletePedido);
 router.get('/cantidadPedidos', pedidoController.cantidadPedidos);
 router.get('/obtenerPorId/:id', pedidoController.obtenerPorId);
-router.post('/entregado/:id', pedidoController.estadoEntregado);
+router.post('/entregar', pedidoController.estadoEntregado);
 router.get('/lista', pedidoController.obtenerListaConCliente);
+router.get('/detallePedido/:id', pedidoController.verDetallesPedido);
 
 // Ruta para obtener el conteo de clientes
 router.get('/count', pedidoController.getPedidoCount);
