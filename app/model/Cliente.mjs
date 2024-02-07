@@ -16,8 +16,7 @@ const clientSchema = new mongoose.Schema({
     },
     celular: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
     correo: {
         type: String,
@@ -34,5 +33,6 @@ const clientSchema = new mongoose.Schema({
 });
 
 const Cliente = mongoose.model('Cliente', clientSchema);
+
 
 export default Cliente;
