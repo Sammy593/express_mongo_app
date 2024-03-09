@@ -62,24 +62,6 @@ export const verDetallesPedido = async (req, res) => {
     }
 }
 
-export const abastecerPedido = async (req, res) => {
-    try {
-        //Consumir microservicio 1 actualizarCantidadPaquetesLote(cod_lote, cantidad_paquetes)
-        const response = await axios.put(process.env.URL_MICROSERVICIO1 + "/loteProductos/updateCantidadPaquetesDisponibles/"+req.body.codLote+"/"+req.body.cantidad_paquetes);
-        if(response.status == 200){
-            const agregarPaquetes = await pedidoServiceModule.agregarPaquetes(req.body);
-            const evaluar = await pedidoServiceModule.evaluarYactualizarEstadoPedido(req.body.idPedido);
-            if(agregarPaquetes && evaluar){
-                res.status(201).json({message: "Abastecido correctamente"});
-            }else{
-                res.status(500).json({messaje: "Fallo al agregar"});
-            }
-        }
-    } catch (err) {
-        res.status(400).json({ message: err.message });
-    }
-}
-
 /*
 export const agregarPaquetes = async (req, res) => {
     try {
