@@ -7,11 +7,11 @@ import { logger } from './app/middleware/logEvents.mjs';
 import errorHandler from './app/middleware/errorHandler.mjs';
 
 import './loadEnvironment.mjs';
-//import './config/connMongo.mjs';
-import './app/consumers/consumers.mjs';
+import './config/connMongo.mjs';
+import './app/consumers/rabbitmq/consumers.mjs';
 
 const app = express();
-const PORT = process.env.PORT || 3501;
+const PORT = process.env.PORT || 3500;
 
 // Custom middleware logger
 app.use(logger);

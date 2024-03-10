@@ -1,7 +1,9 @@
 const whitelist = [
     'http://127.0.0.1:5500',
     'http://localhost:3500',
-    'http://localhost:4200'
+    'http://localhost:4200',
+    'http://26.47.197.63:4200',
+    '*'
 ];
 
 const corsOptions = {
